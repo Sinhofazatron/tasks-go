@@ -34,15 +34,15 @@ func NewUserUninitialized(fullName string, phoneNumber *string) User {
 }
 
 func (u *User) Validate() error {
-	fullNameLength := len([]rune(u.FullName))
-	if fullNameLength < 3 || fullNameLength > 100 {
-		return fmt.Errorf("invalid `FullName` len: %d: %w", fullNameLength, core_errors.ErrInvalidArgument)
+	fullNameLen := len([]rune(u.FullName))
+	if fullNameLen < 3 || fullNameLen > 100 {
+		return fmt.Errorf("invalid `FullName` len: %d: %w", fullNameLen, core_errors.ErrInvalidArgument)
 	}
 
 	if u.PhoneNumber != nil {
-		phoneNumber := len([]rune(*u.PhoneNumber))
-		if phoneNumber < 10 || phoneNumber > 15 {
-			return fmt.Errorf("invalid `PhoneNumber` len: %d: %w", phoneNumber, core_errors.ErrInvalidArgument)
+		phoneNumberLen := len([]rune(*u.PhoneNumber))
+		if phoneNumberLen < 10 || phoneNumberLen > 15 {
+			return fmt.Errorf("invalid `PhoneNumber` len: %d: %w", phoneNumberLen, core_errors.ErrInvalidArgument)
 		}
 
 		re := regexp.MustCompile(`^\+[0-9]+$`)
@@ -58,6 +58,13 @@ func (u *User) Validate() error {
 type UserPatch struct {
 	FullName    Nullable[string]
 	PhoneNumber Nullable[string]
+}
+
+func NewUserPatch(fullName, phoneNumber Nullable[string]) UserPatch {
+	return UserPatch{
+		FullName:    fullName,
+		PhoneNumber: phoneNumber,
+	}
 }
 
 func (p *UserPatch) Validate() error {
