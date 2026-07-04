@@ -58,3 +58,7 @@ todoapp-run:
 	go mod tidy && \
 	go run ${PROJECT_ROOT}/cmd/todoapp/main.go
 	
+start:
+	@make env-up \
+	env-port-forward \
+	todoapp-run
