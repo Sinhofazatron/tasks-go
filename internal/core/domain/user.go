@@ -27,7 +27,7 @@ func NewUser(id, version int, fullName string, phoneNumber *string) User {
 func NewUserUninitialized(fullName string, phoneNumber *string) User {
 	return NewUser(
 		UninitializedID,
-		UninitializedVaersion,
+		UninitializedVersion,
 		fullName,
 		phoneNumber,
 	)

@@ -8,7 +8,7 @@ import (
 	core_errors "github.com/Sinhofazatron/tasks-go/internal/core/errors"
 )
 
-func GetQueryParam(r *http.Request, key string) (*int, error) {
+func GetIntQueryParam(r *http.Request, key string) (*int, error) {
 	param := r.URL.Query().Get(key)
 	if param == "" {
 		return nil, nil

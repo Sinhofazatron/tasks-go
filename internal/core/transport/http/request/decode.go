@@ -26,7 +26,7 @@ func DecodeAndValidateRequest(r *http.Request, dest any) error {
 	if ok {
 		err = v.Validate()
 	} else {
-		requestValidator.Struct(dest)
+		err = requestValidator.Struct(dest)
 	}
 
 	if err != nil {
